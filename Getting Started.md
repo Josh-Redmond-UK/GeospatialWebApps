@@ -43,10 +43,3 @@ If you aren't using Anaconda navigator, you can open jupyter notebook by running
 
 Now, let's begin! 
 
-
-
-
-> Written with [StackEdit](https://stackedit.io/).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjE0MDIxMTddfQ==
--->

@@ -27,8 +27,3 @@ By the end of this course, you will be able to:
  9. R - Overview of Shiny 
  10. R - Interactivity and mapping in Shiny 
  11. R - Sharing your Shiny Applications  
-
-> Written with [StackEdit](https://stackedit.io/).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTQ1NjMyMjddfQ==
--->

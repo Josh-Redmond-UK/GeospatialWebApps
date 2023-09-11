@@ -1,0 +1,1 @@
+Write soem stuff here (preferablly before the course starts)

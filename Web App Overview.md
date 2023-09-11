@@ -14,7 +14,3 @@ If you want inspiration, here are some really good examples of scientific web ap
 
 
 
-> Written with [StackEdit](https://stackedit.io/).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbNTcxMTg0ODBdfQ==
--->
