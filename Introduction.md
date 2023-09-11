@@ -20,10 +20,12 @@ By the end of this course, you will be able to:
  2. Setting up - downloading all the files you need, troubleshooting any problems
  3. Python - Basics of interaction with Jupyter Notebooks
  4. Python - Using widgets to design interfaces 
- 5. Python - Mapping with ipyleaflet 
- 6. Python - Notebooks to Apps with Voila
- 7. Python - Hosting and sharing Voila with Binder
- 8. Python (Extension if we have time) - Using Streamlit to create apps 
- 9. R - Overview of Shiny 
- 10. R - Interactivity and mapping in Shiny 
- 11. R - Sharing your Shiny Applications  
+ 5. UI/UX for absolute beginners 
+ 6. Python - Mapping with ipyleaflet 
+ 7. Python - Notebooks to Apps with Voila
+ 8. Python - Hosting and sharing Voila with Binder
+ 9. Overview of other web-hosting services 
+ 10. Python (Extension if we have time) - Using Streamlit to create apps 
+ 11. R - Overview of Shiny 
+ 12. R - Interactivity and mapping in Shiny 
+ 13. R - Sharing your Shiny Applications  
