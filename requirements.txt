@@ -1,0 +1,7 @@
+numpy
+rasterio
+ipyleaflet
+ipywidgets
+matplotlib
+Pillow
+voila
