@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Basics of Interaction &#8212; Geospatial Web Apps in Python and R</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"9a8068b326ae45ed8296e7d3ce4a6793": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "12dff09f25444988a58dfeede0b5c438": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "e677ec5ed3ec4ef29a82077fa4556c24": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "M:", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_9a8068b326ae45ed8296e7d3ce4a6793", "max": 10, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_12dff09f25444988a58dfeede0b5c438", "tabbable": null, "tooltip": null, "value": 2}}, "a4aff1ec5a6745469b70fa3f5fe869b7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "78753545772749e3ab25b75ff22f6412": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "66cd3e03ecc946dfb152c19713abca96": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "C:", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_a4aff1ec5a6745469b70fa3f5fe869b7", "max": 10, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_78753545772749e3ab25b75ff22f6412", "tabbable": null, "tooltip": null, "value": 3}}, "66643d61e6614a8f9967a0b635d072ab": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "321dbeaf00cb45b08a908700f50ecefa": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_66643d61e6614a8f9967a0b635d072ab", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {}, "data": {"text/plain": "<Figure size 640x480 with 1 Axes>", "image/png": "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XTNGXMIuIABRgcACxJmScpsKiytks38XULIsZt1x1cV+te/etZNWTh/C9A+AqEJgAeJISblNs1ftVuOyKlX2Wj2x9TN169JRJ8+0PC3020l5hBUAUYexXiBOOF2GCosrmoQVSZ5rrcWQe0fnaOJADi4EEH0YYQFinHu9yrsHvvKaBmrMkPT1mXNacGM/rd512Ove9K4d9btJeWxZBhC1CCxADGtuvUprLunRVTseuL7JolymgQBEs4CnhLZv366CggJlZ2fLZDLp9ddf9/rcMAw9/PDDys7OVufOnXXdddfp448/bvW5a9euVW5urlJSUpSbm6v169cH2jUgobjXqwQSViQpI9Ws5CSTRvTtrkmDempE3+6EFQBRL+DAcvr0aV1xxRVasWJFs58/9thjevzxx7VixQrt2rVLVqtVY8eOVU1Njc9nlpaWaurUqZoxY4b27t2rGTNm6Pbbb9f7778faPeAhNDSehVfTKrfLTQ0Jz1c3QKAsDEZhhHEOa3fNjaZtH79ek2ePFlS/ehKdna25s+frwceeECSVFdXp8zMTC1fvlz33ntvs8+ZOnWqHA6H3nzzTc+18ePH64ILLtBrr73mV18cDocsFovsdrvS0tKC/ZWAmFB68ISmPf+e3/e7x09WTs/X+DwW1QKIHv5+f4d0l1BlZaWqqqo0btw4z7WUlBRde+21+uc//+mzXWlpqVcbSbrppptabAMkskCKwEmS1WImrACIaSFddFtVVSVJyszM9LqemZmpL7/8ssV2zbVxP685dXV1qqur87x3OBzBdBmISRmpZr/umzvmUo26tAeLagHEvLDUYTGZvP+H0TCMJtfa2qaoqEgWi8Xz6tWrV/AdBqKU02Wo9OAJbSg7otKDJ+R01c/gDs1JV5bF7LOuinu9yoKx32dRLYC4ENIRFqvVKql+xCQr67uh52PHjjUZQWncrvFoSmttFi1apIULF3reOxwOQgviiq8S+0sLcjU+L0tLC3I1e9VumSSvxbfuaLK0IJegAiBuhHSEJScnR1arVVu2bPFcO3v2rLZt26aRI0f6bDdixAivNpK0efPmFtukpKQoLS3N6wXEC19blqvstZq9ardKym0an5elldPzZbV4Tw+xXgVAPAp4hOXUqVM6cOCA531lZaXKysqUnp6uiy++WPPnz9eyZcvUr18/9evXT8uWLVOXLl10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JbwHHnhAdrtdl112mZKTk+V0OvXII49o2rRpke5aTIrrwOJmMpm83huG0eQaImvu3Lnat2+fduzYEemu4FuHDx/WvHnztHnzZpnN5kh3B81wuVy68sortWzZMknS4MGD9fHHH2vlypUEliiwZs0arVq1Sq+++qr69++vsrIyzZ8/X9nZ2Zo1a1akuxdz4jqw9OjRQ8nJyU1GU44dO9Zk1AWR84tf/EIbN27U9u3bddFFF0W6O/jWhx9+qGPHjmnIkCGea06nU9u3b9eKFStUV1en5OTkCPYQWVlZys3N9bp2+eWXa+3atRHqERr6t3/7Nz344IO64447JEkDBgzQl19+qaKiIgJLEOJ6DUunTp00ZMgQbdmyxev6li1bNHLkyAj1Cm6GYWju3Llat26d3nrrLeXk5ES6S2jghhtu0EcffaSysjLP68orr9RPfvITlZWVEVaiwKhRo5qUAvjss8/Uu3fvCPUIDZ05c0ZJSd5fs8nJyWxrDlJcj7BI0sKFCzVjxgxdeeWVGjFihJ577jkdOnRI9913X6S7lvDmzJmjV199VRs2bFBqaqpnJMxisahz584R7h1SU1ObrCfq2rWrunfvzjqjKLFgwQKNHDlSy5Yt0+23366dO3fqueee03PPPRfprkFSQUGBHnnkEV188cXq37+/9uzZo8cff1x33313pLsWm4wE8PTTTxu9e/c2OnXqZOTn5xvbtm2LdJdgGIakZl8vvvhipLsGH6699lpj3rx5ke4GGiguLjby8vKMlJQU47LLLjOee+65SHcJ33I4HMa8efOMiy++2DCbzUafPn2Mhx56yKirq4t012JS3NdhAQAAsS+u17AAAID4QGABAABRj8ACAACiHoEFAABEPQILAACIegQWAAAQ9QgsAAAg6hFYAABA1COwAACAqEdgAQAAUY/AAgAAoh6BBQAARL3/H8vTkj/ZFG9cAAAAAElFTkSuQmCC"}}], "tabbable": null, "tooltip": null}}, "73131b01d0314c89886448a31b5a6a44": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "85d2581b6a994f62bf95472673d29368": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "8d9e959d0e7441338800ef8997afc088": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "M:", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_73131b01d0314c89886448a31b5a6a44", "max": 10, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_85d2581b6a994f62bf95472673d29368", "tabbable": null, "tooltip": null, "value": 2}}, "ef609381cdd747acb185f667bb0c50e8": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2e3cfab513be41b9b8eacbde8d401a1a": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "b7ba901b76874c8dae679663a9cd6c9f": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "C:", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_ef609381cdd747acb185f667bb0c50e8", "max": 10, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_2e3cfab513be41b9b8eacbde8d401a1a", "tabbable": null, "tooltip": null, "value": 3}}, "03980ea599fb4447a1adcc425746d090": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "20b1eb215232462d9819c559e7719396": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": ""}}, "37f12d1fb87545a49b8b9fe45f0bd9ca": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "DropdownModel", "_options_labels": ["Item 1", "Item 2"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "DropdownView", "description": "", "description_allow_html": false, "disabled": false, "index": 0, "layout": "IPY_MODEL_03980ea599fb4447a1adcc425746d090", "style": "IPY_MODEL_20b1eb215232462d9819c559e7719396", "tabbable": null, "tooltip": null}}, "7a461ef053d844d19b7209d2d5da2ecc": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7466a1c977aa4b298f61324756408a41": {"model_name": "ButtonStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "button_color": null, "font_family": null, "font_size": null, "font_style": null, "font_variant": null, "font_weight": null, "text_color": null, "text_decoration": null}}, "d9a92da60779448ebda4300a7a5ad984": {"model_name": "ButtonModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ButtonView", "button_style": "", "description": "Reset", "disabled": false, "icon": "", "layout": "IPY_MODEL_7a461ef053d844d19b7209d2d5da2ecc", "style": "IPY_MODEL_7466a1c977aa4b298f61324756408a41", "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Python/2_Basics of Interaction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="UX Design for Total Beginners" href="4_Ux%20Design%20for%20Absolute%20Beginners.html" />
+    <link rel="prev" title="Getting Started" href="../1_Getting%20Started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../0_Introduction.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Geospatial Web Apps in Python and R</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../0_Introduction.html">
+                    Welcome to the GIScience 2023 full day workshop on Geospatial Web Apps in Python and R!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Getting%20Started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics of Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Ux%20Design%20for%20Absolute%20Beginners.html">UX Design for Total Beginners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_Mapping%20with%20Ipyleaflet.html">Mapping with ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_Models%20and%20Maps%20with%20Ipyleaflet.html">Models and Maps with Ipyleaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Hosting%20and%20Sharing%20Voila%20Apps%20with%20Binder.html">Hosting and Sharing Voila Apps with Binder</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../R/8_Intro%20to%20R%20Shiny.html">Introduction to R Shiny</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../R/9_Widgets%20in%20Shiny.html">Widgets in R Shiny</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../R/10_Mapping%20in%20Shiny.html">Mapping in Shiny</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../R/11_Sharing%20your%20Shiny%20App.html">Sharing your Shiny App</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Josh-Redmond-UK/GeospatialWebApps/main/v2/gh/Josh-Redmond-UK/GeospatialWebApps/main?urlpath=tree/book/Python/2_Basics of Interaction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Josh-Redmond-UK/GeospatialWebApps" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Josh-Redmond-UK/GeospatialWebApps/issues/new?title=Issue%20on%20page%20%2FPython/2_Basics of Interaction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Python/2_Basics of Interaction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basics of Interaction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="basics-of-interaction">
+<h1>Basics of Interaction<a class="headerlink" href="#basics-of-interaction" title="Permalink to this heading">#</a></h1>
+<p>In this section of the class, you will explore how to load in data and interact with it visually using widgets in a notebook format. These widgets will form the basis of the apps that you will create in this class. Widgets are a powerful tool and can be used for a wide range of different tasks, and can even be customised with javascript if you so desire.</p>
+<p>First, we’ll load in some data. I have created a set of custom python scripts which handle all of the data management and loading, so you don’t need to worry about writing custom loading functions or anything similar, we will focus entirely on building interaction and visualisation systems rather than data wrangling or modelling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## We will start with some generated dummy data to learn the basics of interactive visualisation</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1">#from utils.functions import *</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">generate_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">generate_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fb4e2350cd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/cbf2a648a36daac55208a986e8501335156aac90906441bf7b7f7102b2ee6071.png" src="../_images/cbf2a648a36daac55208a986e8501335156aac90906441bf7b7f7102b2ee6071.png" />
+</div>
+</div>
+<p>In the above cell we have generated some data and plotted it - the Y part of the data is generated according to parameters set by the user. If you imagine this to be a model of some phenomena, then varying the input parameters lets a user or researcher explore what different scenarios might mean and how they affect outcomes important to them.</p>
+<p>We are now going to see how we can add a visual tool which lets a user change the parameters of the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="n">m_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;M:&#39;</span><span class="p">)</span>
+
+<span class="n">c_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;C:&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">c_slider</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">m_slider</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "66cd3e03ecc946dfb152c19713abca96"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "e677ec5ed3ec4ef29a82077fa4556c24"}</script></div>
+</div>
+<p>The above code creates two integer sliders which let the user select parameter values between limits that we have defined. This lets them visually select the values and interact with them. It is easy to then extract the values from the widgets by using the .value property, as below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;M:&quot;</span><span class="p">,</span> <span class="n">m_slider</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">c_slider</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">generate_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m_slider</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">c_slider</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M: 2
+C 3
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fb4f111ec20&gt;
+</pre></div>
+</div>
+<img alt="../_images/cbf2a648a36daac55208a986e8501335156aac90906441bf7b7f7102b2ee6071.png" src="../_images/cbf2a648a36daac55208a986e8501335156aac90906441bf7b7f7102b2ee6071.png" />
+</div>
+</div>
+<p>Updating the chart with user input is easy, but in the above example a user changing the parameters doesn’t automatically update the chart, we can change this by using observers. Observers are an important concept in web-development generally, but in this case what you need to know is that they allow you to set a function which is called when the state of a widget changes. Below, we will create two observers for the sliders which are called every time their value is changed, updating the chart.</p>
+<p>Because these are reactive to user input, you can use them to do all manner of interesting things, updating the charts and triggering analysis in response to the user input without requiring them to specifically click a prompt.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plot_display</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">plot_display</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">generate_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">chart</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">m_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;M:&#39;</span><span class="p">)</span>
+
+<span class="n">c_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;C:&#39;</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">update_chart</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">generate_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m_slider</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">c_slider</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">plot_display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">plot_display</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">chart</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">m_slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update_chart</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="n">c_slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update_chart</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">plot_display</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">m_slider</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">c_slider</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "321dbeaf00cb45b08a908700f50ecefa"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8d9e959d0e7441338800ef8997afc088"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "b7ba901b76874c8dae679663a9cd6c9f"}</script></div>
+</div>
+<p>There’s a load of different ways to handle this kind of interaction, including using buttons and listening for mouseclicks. Depending on what the goals are of the application, and what computation you are doing, you might use a different approach. If you are generating data in a computationally intensive way, you might not want to re-run all your code every time the user updates something, instead using a button to start that process.</p>
+<p>Now, it is your turn, in the following exercises, you will create some basic interactive tools and use them to generate and visualise data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Exercise 1: Re-write the generation function so the data is exponential (x^m + c) rather than linear and plot the data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Exercise 2: Vary visualisation parameters with a dropdown menu</span>
+<span class="c1"># Hint: Use the widgets.Dropdown() function</span>
+<span class="c1"># Dropdown menus work in basically the same way as the sliders, but with categorical options which you specify by hand</span>
+
+<span class="n">example_dropdown</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Item 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 2&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">example_dropdown</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "37f12d1fb87545a49b8b9fe45f0bd9ca"}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Exercise 3: Add a button to reset the visualisation</span>
+<span class="c1"># Hint: Use the widgets.Button() function</span>
+<span class="c1"># Buttons are widgets which you can click to trigger an action</span>
+<span class="c1"># You can specify the action by passing a function to the button&#39;s on_click() method</span>
+
+<span class="n">example_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Reset&#39;</span><span class="p">)</span>
+<span class="n">example_button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Button clicked!&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">example_button</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d9a92da60779448ebda4300a7a5ad984"}</script></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../1_Getting%20Started.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Getting Started</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_Ux%20Design%20for%20Absolute%20Beginners.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UX Design for Total Beginners</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Josh Redmond
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 0_Introduction
+parts:
+  - caption: Introduction
+    chapters:
+      - file: 1_Getting Started
+  - caption: Python
+    chapters:
+      - file: Python/2_Basics of Interaction
+      - file: Python/3_Desinging Interfaces with Widgets
+      - file: Python/4_Ux Design for Absolute Beginners
+      - file: Python/5_Mapping with Ipyleaflet
+      - file: Python/6_Models and Maps with Ipyleaflet
+      - file: Python/7_Hosting and Sharing Voila Apps with Binder
+  - caption: Python
+    chapters:
+      - file: R/8_Intro to R Shiny
+      - file: R/9_Widgets in Shiny
+      - file: R/10_Mapping in Shiny
+      - file: R/11_Sharing your Shiny App
