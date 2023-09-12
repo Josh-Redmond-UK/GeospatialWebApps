@@ -15,7 +15,7 @@ In the repository for this class, in the Python folder there should be three fil
 
 Copy all of these to a new directory and create a new github repository. If you have not done this before, the easiest way is to download [GitHub Desktop](https://desktop.github.com), initalize a new repository, and push your files to GitHub. Once you have done this, make sure your repository is public and navigate to its webpage on your profile. 
 
-Once you have done this, in a new tab navigate to https://mybinder.org, and paste the url to your github repository in the top input box. In the 'path to a notebook file' box, use the dropdown on the right to select 'URL' instead of 'File' and paste /VOILA/voila_demo.ipynb to ensure the service opens your notebook in voila. 
+Once you have done this, in a new tab navigate to https://mybinder.org, and paste the url to your github repository in the top input box. In the 'path to a notebook file' box, use the dropdown on the right to select 'URL' instead of 'File' and paste /voila/render/voila_demo.ipynb to ensure the service opens your notebook in voila. 
 
 Click Launch, and wait. After a few minutes, your app should be usable! 
 
