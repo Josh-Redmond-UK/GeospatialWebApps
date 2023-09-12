@@ -25,10 +25,9 @@ By the end of this course, you will be able to:
  7. Python - Notebooks to Apps with Voila
  8. Python - Hosting and sharing Voila with Binder
  9. Overview of other web-hosting services 
- 10. Python (Extension if we have time) - Using Streamlit to create apps 
- 11. R - Overview of Shiny 
- 12. R - Interactivity and mapping in Shiny 
- 13. R - Sharing your Shiny Applications  
+ 10. R - Overview of Shiny 
+ 11. R - Interactivity and mapping in Shiny 
+ 12. R - Sharing your Shiny Applications  
 
 
 ## Overview of Web Apps

@@ -9,17 +9,11 @@ First, if you need to, navigate to and download the Anaconda installer, [availab
 
 Install Anaconda. Once this process is completed, create a new environment for this course, call it something like "geospatialWebApps" or whatever you like. 
 
-[screenshot showing buttons to click]
-
 Next, either clone the GitHub repo or download the files from the web page.  
-
-[screeenshot showing download button here]
 
 Then, if you need to, extract the files from the zip and place them somewhere easy to access. 
 
 Open up Anaconda, select the environment you have just created, and select 'open terminal' 
-
-[image]
 
 Then, navigate to the directory you have put the downloaded repository in, choosing the subfolder which contains the files for the Python part of the course. 
 
@@ -34,8 +28,6 @@ If you would rather use pip or are using a different environment manager, you ca
     pip install -r requirements.txt
 
 Then, open Anaconda Navigator and start up Jupyter notebook. 
-
-[image]
 
 If you aren't using Anaconda navigator, you can open jupyter notebook by running the following in your terminal:
 
