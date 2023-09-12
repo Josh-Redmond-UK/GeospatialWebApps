@@ -9,7 +9,7 @@ First, if you need to, navigate to and download the Anaconda installer, [availab
 
 Install Anaconda. Once this process is completed, create a new environment for this course, call it something like "geospatialWebApps" or whatever you like. 
 
-Next, either clone the GitHub repo or download the files from the web page.  
+Next, either clone the GitHub repo or download the files from the web page. 
 
 Then, if you need to, extract the files from the zip and place them somewhere easy to access. 
 
