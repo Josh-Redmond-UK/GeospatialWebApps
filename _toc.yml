@@ -10,12 +10,12 @@ parts:
   - caption: Python
     chapters:
       - file: Python/2_Basics of Interaction
-      - file: Python/3_Desinging Interfaces with Widgets
+      - file: Python/3_Designing Interfaces with Widgets
       - file: Python/4_Ux Design for Absolute Beginners
       - file: Python/5_Mapping with Ipyleaflet
       - file: Python/6_Models and Maps with Ipyleaflet
       - file: Python/7_Hosting and Sharing Voila Apps with Binder
-  - caption: Python
+  - caption: R
     chapters:
       - file: R/8_Intro to R Shiny
       - file: R/9_Widgets in Shiny
