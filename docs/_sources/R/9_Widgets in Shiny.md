@@ -5,22 +5,25 @@ Widgets in Shiny work much the same way as they do in ipython, but with a few ca
 
 An empty RShiny app looks like this:
 
-``` 
+~~~
 library(shiny)
 
 ui <- fluidPage()
 
 server <- function(input, output) {}
 
-shinyApp(ui = ui, server = server)```
+shinyApp(ui = ui, server = server)
+
+~~~
 
 
 
 Notice how the front-end is an object you create, but the back end is a function that processses and returns data. 
 
-Now, lets create a simple application like we did for the beginning of the Pythong part of the class, we'll generate some data, and plot it, with the interface updates affecting the generation parameters. 
+Now, lets create a simple application like we did for the beginning of the Python part of the class, we'll generate some data, and plot it, with the interface updates affecting the generation parameters. 
 
 ``` 
+
 library(shiny)
 library(ggplot2)
 
@@ -109,6 +112,9 @@ shinyApp(ui = ui, server = server)
 
 
 ### Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots 
-HINT: in the main panel, use something like ```tabsetPanel(tabPanel("Title", contents),tabPanel("Title", contents))```
+HINT: in the main panel, use something like
+```
+tabsetPanel(tabPanel("Title", contents),tabPanel("Title", contents))
+```
 The layout options are more extensive in Shiny than when using Ipywidgets, so have a look at the layout guide here for inspiration: https://shiny.posit.co/r/articles/build/layout-guide/ 
 

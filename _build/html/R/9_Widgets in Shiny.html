@@ -61,8 +61,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'R/9_Widgets in Shiny';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -169,12 +167,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="8_Intro%20to%20R%20Shiny.html">Introduction to R Shiny</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Widgets in R Shiny</a></li>
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="10_Mapping%20in%20Shiny.html">Mapping in Shiny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_Sharing%20your%20Shiny%20App.html">Sharing your Shiny App</a></li>
 </ul>
@@ -370,15 +362,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Widgets in R Shiny</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-ui-for-application-that-lets-you-draw-a-scatter-plot">Define UI for application that lets you draw a scatter plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-server-logic-required-to-draw-a-scatter-plot">Define server logic required to draw a scatter plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-application">Run the application</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-ui-for-application-that-draws-a-histogram">Define UI for application that draws a histogram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-server-logic-required-to-draw-a-histogram">Define server logic required to draw a histogram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run the application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function">Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots">Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -393,102 +379,109 @@ document.write(`
 <h1>Widgets in R Shiny<a class="headerlink" href="#widgets-in-r-shiny" title="Permalink to this heading">#</a></h1>
 <p>Widgets in Shiny work much the same way as they do in ipython, but with a few caveats. The skills you have practiced earlier in designing interfaces with containers, and creating widgets that update data and call functions. The main difference is that rather than keeping everything in a single cell or document, RShiny specifically splits up your code into the interface and server, this is analagous to the front end and back end of the application, where the user interacts with the front end and the computer crunches the numbers and produces output on the back end.</p>
 <p>An empty RShiny app looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
+
+<span class="n">ui</span> <span class="o">&lt;-</span> <span class="n">fluidPage</span><span class="p">()</span>
+
+<span class="n">server</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="n">shinyApp</span><span class="p">(</span><span class="n">ui</span> <span class="o">=</span> <span class="n">ui</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Notice how the front-end is an object you create, but the back end is a function that processses and returns data.</p>
+<p>Now, lets create a simple application like we did for the beginning of the Python part of the class, we’ll generate some data, and plot it, with the interface updates affecting the generation parameters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+library(shiny)
+library(ggplot2)
+
+# Define UI for application that lets you draw a scatter plot
+ui &lt;- fluidPage(
+  
+  
+    
+    titlePanel(&quot;Demonstration App&quot;),
+    
+    sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
+    
+    sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1),
+    
+    plotOutput(outputId = &#39;scatterPlot&#39;)
+    
+  
+  
+)
+
+# Define server logic required to draw a scatter plot
+server &lt;- function(input, output) {
+
+  
+  output$scatterPlot &lt;- renderPlot({
+    x &lt;- seq(0, 100)
+    y &lt;- x* input$c_slider * input$m_slider
+    ggplot() + geom_point(aes(x, y))
+  })
+  
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+</pre></div>
+</div>
+<p>Next, we will arrange this to be a bit more aesthetically pleasing, this can be done in a very similar way to the widgets in python we used earlier by defining containers and layouts which are relative to one another.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(shiny)
+library(ggplot2)
 
-ui &lt;- fluidPage()
+# Define UI for application that draws a histogram
+ui &lt;- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel(
+    
+    titlePanel(&quot;Demonstration App&quot;),
+    
+    sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
+    
+    sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1)),
+    mainPanel (
+    plotOutput(outputId = &#39;scatterPlot&#39;)))
+    
+  
+  
+)
 
-server &lt;- function(input, output) {}
+# Define server logic required to draw a histogram
+server &lt;- function(input, output) {
 
-shinyApp(ui = ui, server = server)```
-
-
-
-Notice how the front-end is an object you create, but the back end is a function that processses and returns data. 
-
-Now, lets create a simple application like we did for the beginning of the Pythong part of the class, we&#39;ll generate some data, and plot it, with the interface updates affecting the generation parameters. 
-
-</pre></div>
-</div>
-<p>library(shiny)
-library(ggplot2)</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="define-ui-for-application-that-lets-you-draw-a-scatter-plot">
-<h1>Define UI for application that lets you draw a scatter plot<a class="headerlink" href="#define-ui-for-application-that-lets-you-draw-a-scatter-plot" title="Permalink to this heading">#</a></h1>
-<p>ui &lt;- fluidPage(</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>titlePanel(&quot;Demonstration App&quot;),
-
-sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
-
-sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1),
-
-plotOutput(outputId = &#39;scatterPlot&#39;)
-</pre></div>
-</div>
-<p>)</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="define-server-logic-required-to-draw-a-scatter-plot">
-<h1>Define server logic required to draw a scatter plot<a class="headerlink" href="#define-server-logic-required-to-draw-a-scatter-plot" title="Permalink to this heading">#</a></h1>
-<p>server &lt;- function(input, output) {</p>
-<p>output<span class="math notranslate nohighlight">\(scatterPlot &lt;- renderPlot({
+  
+  output$scatterPlot &lt;- renderPlot({
     x &lt;- seq(0, 100)
-    y &lt;- x* input\)</span>c_slider * input$m_slider
-ggplot() + geom_point(aes(x, y))
-})</p>
-<p>}</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="run-the-application">
-<h1>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this heading">#</a></h1>
-<p>shinyApp(ui = ui, server = server)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+    y &lt;- x* input$c_slider * input$m_slider
+    ggplot() + geom_point(aes(x, y))
+  })
+  
 
-<span class="n">Next</span><span class="p">,</span> <span class="n">we</span> <span class="n">will</span> <span class="n">arrange</span> <span class="n">this</span> <span class="n">to</span> <span class="n">be</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">more</span> <span class="n">aesthetically</span> <span class="n">pleasing</span><span class="p">,</span> <span class="n">this</span> <span class="n">can</span> <span class="n">be</span> <span class="n">done</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">very</span> <span class="n">similar</span> <span class="n">way</span> <span class="n">to</span> <span class="n">the</span> <span class="n">widgets</span> <span class="ow">in</span> <span class="n">python</span> <span class="n">we</span> <span class="n">used</span> <span class="n">earlier</span> <span class="n">by</span> <span class="n">defining</span> <span class="n">containers</span> <span class="ow">and</span> <span class="n">layouts</span> <span class="n">which</span> <span class="n">are</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">one</span> <span class="n">another</span><span class="o">.</span> 
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
 
 </pre></div>
 </div>
-<p>library(shiny)
-library(ggplot2)</p>
+<section id="exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function">
+<h2>Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function<a class="headerlink" href="#exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function" title="Permalink to this heading">#</a></h2>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="define-ui-for-application-that-draws-a-histogram">
-<h1>Define UI for application that draws a histogram<a class="headerlink" href="#define-ui-for-application-that-draws-a-histogram" title="Permalink to this heading">#</a></h1>
-<p>ui &lt;- fluidPage(</p>
-<p>sidebarLayout(
-sidebarPanel(</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>titlePanel(&quot;Demonstration App&quot;),
-
-sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
-
-sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1)),
-mainPanel (
-plotOutput(outputId = &#39;scatterPlot&#39;)))
+<section id="exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots">
+<h2>Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots<a class="headerlink" href="#exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots" title="Permalink to this heading">#</a></h2>
+<p>HINT: in the main panel, use something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tabsetPanel</span><span class="p">(</span><span class="n">tabPanel</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">),</span><span class="n">tabPanel</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>)</p>
+<p>The layout options are more extensive in Shiny than when using Ipywidgets, so have a look at the layout guide here for inspiration: <a class="reference external" href="https://shiny.posit.co/r/articles/build/layout-guide/">https://shiny.posit.co/r/articles/build/layout-guide/</a></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="define-server-logic-required-to-draw-a-histogram">
-<h1>Define server logic required to draw a histogram<a class="headerlink" href="#define-server-logic-required-to-draw-a-histogram" title="Permalink to this heading">#</a></h1>
-<p>server &lt;- function(input, output) {</p>
-<p>output<span class="math notranslate nohighlight">\(scatterPlot &lt;- renderPlot({
-    x &lt;- seq(0, 100)
-    y &lt;- x* input\)</span>c_slider * input$m_slider
-ggplot() + geom_point(aes(x, y))
-})</p>
-<p>}</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Run the application<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>shinyApp(ui = ui, server = server)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-### Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function
-
-
-
-
-### Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots 
-HINT: in the main panel, use something like ```tabsetPanel(tabPanel(&quot;Title&quot;, contents),tabPanel(&quot;Title&quot;, contents))```
-The layout options are more extensive in Shiny than when using Ipywidgets, so have a look at the layout guide here for inspiration: https://shiny.posit.co/r/articles/build/layout-guide/ 
-
-</pre></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -558,15 +551,9 @@ The layout options are more extensive in Shiny than when using Ipywidgets, so ha
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Widgets in R Shiny</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-ui-for-application-that-lets-you-draw-a-scatter-plot">Define UI for application that lets you draw a scatter plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-server-logic-required-to-draw-a-scatter-plot">Define server logic required to draw a scatter plot</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-application">Run the application</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-ui-for-application-that-draws-a-histogram">Define UI for application that draws a histogram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-server-logic-required-to-draw-a-histogram">Define server logic required to draw a histogram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run the application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function">Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots">Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
