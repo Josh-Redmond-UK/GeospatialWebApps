@@ -19,6 +19,17 @@ Once you've done that, open up RStudio, the first thing you will need to do is i
 
 ```install.packages("shiny")```
 
+You will additionally need some other packages for the application to work, please run the following code:
+
+``` 
+
+install.packages("leaflet")
+install.packages("rsconnect")
+install.packages("raster")
+
+
+```
+
 Once you have done that, click on the new document icon on the top left of the interface, and scroll down to the 'new shiny app' option, select single file. 
 
 Helpfully - this generates an example application for you! Click the 'run app' button and it will pop up in a web page. 

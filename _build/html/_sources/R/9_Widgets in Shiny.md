@@ -50,7 +50,7 @@ server <- function(input, output) {
   
   output$scatterPlot <- renderPlot({
     x <- seq(0, 100)
-    y <- x* input$c_slider * input$m_slider
+    y <- x input$m_slider +  input$c_slider 
     ggplot() + geom_point(aes(x, y))
   })
   
@@ -70,7 +70,6 @@ Next, we will arrange this to be a bit more aesthetically pleasing, this can be 
 library(shiny)
 library(ggplot2)
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
   
   sidebarLayout(
@@ -88,13 +87,12 @@ ui <- fluidPage(
   
 )
 
-# Define server logic required to draw a histogram
 server <- function(input, output) {
 
   
   output$scatterPlot <- renderPlot({
     x <- seq(0, 100)
-    y <- x* input$c_slider * input$m_slider
+    y <- x * input$m_slider +  input$c_slider 
     ggplot() + geom_point(aes(x, y))
   })
   
@@ -118,3 +116,108 @@ tabsetPanel(tabPanel("Title", contents),tabPanel("Title", contents))
 ```
 The layout options are more extensive in Shiny than when using Ipywidgets, so have a look at the layout guide here for inspiration: https://shiny.posit.co/r/articles/build/layout-guide/ 
 
+
+
+### Exercise 1 Solution:
+```
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel(
+      
+      titlePanel("Demonstration App"),
+      
+      sliderInput("c_slider", "C: ", 0, 5, 1),
+      
+      sliderInput("m_slider", "M: ", 0, 5, 1)),
+    mainPanel (
+      plotOutput(outputId = 'scatterPlot'),
+      plotOutput(outputId = 'linePlot')
+      
+      )
+    
+    )
+  
+  
+  
+)
+
+server <- function(input, output) {
+  
+  
+  output$scatterPlot <- renderPlot({
+    x <- seq(0, 100)
+    y <- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_point(aes(x, y))
+  })
+  
+  output$linePlot <- renderPlot({
+    x <- seq(0, 100)
+    y <- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_line(aes(x, y))
+  })
+  
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+
+
+### Exercise 2 Solution
+
+```
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel(
+      
+      titlePanel("Demonstration App"),
+      
+      sliderInput("c_slider", "C: ", 0, 5, 1),
+      
+      sliderInput("m_slider", "M: ", 0, 5, 1)),
+    mainPanel(tabsetPanel (
+      tabPanel("Scatter", plotOutput(outputId = 'scatterPlot')),
+      tabPanel("Line", plotOutput(outputId = 'linePlot'))
+      
+      ))
+    
+    )
+  
+  
+  
+)
+
+server <- function(input, output) {
+  
+  
+  output$scatterPlot <- renderPlot({
+    x <- seq(0, 100)
+    y <- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_point(aes(x, y))
+  })
+  
+  output$linePlot <- renderPlot({
+    x <- seq(0, 100)
+    y <- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_line(aes(x, y))
+  })
+  
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```

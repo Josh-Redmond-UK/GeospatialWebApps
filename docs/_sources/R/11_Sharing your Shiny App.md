@@ -14,3 +14,4 @@ Follow the instructions that the website gives you.
 
 That's it! 
 
+Alternatively, if you click the 'publish' button on the top right of the shiny application script editor, that will prompt you to complete the process to sign up and guide you through deploying your application. 

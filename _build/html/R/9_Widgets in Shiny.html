@@ -161,6 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Python/4_Ux%20Design%20for%20Absolute%20Beginners.html">UX Design for Total Beginners</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/5_Mapping%20with%20Ipyleaflet.html">Mapping with ipyleaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/6_Models%20and%20Maps%20with%20Ipyleaflet.html">Models and Maps with Ipyleaflet</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../Python/7_Hosting%20and%20Sharing%20Voila%20Apps%20with%20Binder.html">Hosting and Sharing Voila Apps with Binder</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">R</span></p>
@@ -364,6 +365,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function">Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots">Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-solution">Exercise 1 Solution:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-solution">Exercise 2 Solution</a></li>
 </ul>
             </nav>
         </div>
@@ -418,7 +421,7 @@ server &lt;- function(input, output) {
   
   output$scatterPlot &lt;- renderPlot({
     x &lt;- seq(0, 100)
-    y &lt;- x* input$c_slider * input$m_slider
+    y &lt;- x input$m_slider +  input$c_slider 
     ggplot() + geom_point(aes(x, y))
   })
   
@@ -435,7 +438,6 @@ shinyApp(ui = ui, server = server)
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(shiny)
 library(ggplot2)
 
-# Define UI for application that draws a histogram
 ui &lt;- fluidPage(
   
   sidebarLayout(
@@ -453,13 +455,12 @@ ui &lt;- fluidPage(
   
 )
 
-# Define server logic required to draw a histogram
 server &lt;- function(input, output) {
 
   
   output$scatterPlot &lt;- renderPlot({
     x &lt;- seq(0, 100)
-    y &lt;- x* input$c_slider * input$m_slider
+    y &lt;- x * input$m_slider +  input$c_slider 
     ggplot() + geom_point(aes(x, y))
   })
   
@@ -481,6 +482,110 @@ shinyApp(ui = ui, server = server)
 </pre></div>
 </div>
 <p>The layout options are more extensive in Shiny than when using Ipywidgets, so have a look at the layout guide here for inspiration: <a class="reference external" href="https://shiny.posit.co/r/articles/build/layout-guide/">https://shiny.posit.co/r/articles/build/layout-guide/</a></p>
+</section>
+<section id="exercise-1-solution">
+<h2>Exercise 1 Solution:<a class="headerlink" href="#exercise-1-solution" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel(
+      
+      titlePanel(&quot;Demonstration App&quot;),
+      
+      sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
+      
+      sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1)),
+    mainPanel (
+      plotOutput(outputId = &#39;scatterPlot&#39;),
+      plotOutput(outputId = &#39;linePlot&#39;)
+      
+      )
+    
+    )
+  
+  
+  
+)
+
+server &lt;- function(input, output) {
+  
+  
+  output$scatterPlot &lt;- renderPlot({
+    x &lt;- seq(0, 100)
+    y &lt;- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_point(aes(x, y))
+  })
+  
+  output$linePlot &lt;- renderPlot({
+    x &lt;- seq(0, 100)
+    y &lt;- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_line(aes(x, y))
+  })
+  
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+</pre></div>
+</div>
+</section>
+<section id="exercise-2-solution">
+<h2>Exercise 2 Solution<a class="headerlink" href="#exercise-2-solution" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  
+  sidebarLayout(
+    sidebarPanel(
+      
+      titlePanel(&quot;Demonstration App&quot;),
+      
+      sliderInput(&quot;c_slider&quot;, &quot;C: &quot;, 0, 5, 1),
+      
+      sliderInput(&quot;m_slider&quot;, &quot;M: &quot;, 0, 5, 1)),
+    mainPanel(tabsetPanel (
+      tabPanel(&quot;Scatter&quot;, plotOutput(outputId = &#39;scatterPlot&#39;)),
+      tabPanel(&quot;Line&quot;, plotOutput(outputId = &#39;linePlot&#39;))
+      
+      ))
+    
+    )
+  
+  
+  
+)
+
+server &lt;- function(input, output) {
+  
+  
+  output$scatterPlot &lt;- renderPlot({
+    x &lt;- seq(0, 100)
+    y &lt;- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_point(aes(x, y))
+  })
+  
+  output$linePlot &lt;- renderPlot({
+    x &lt;- seq(0, 100)
+    y &lt;- x * input$m_slider +  input$c_slider 
+    ggplot() + geom_line(aes(x, y))
+  })
+  
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -553,6 +658,8 @@ shinyApp(ui = ui, server = server)
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-create-a-new-shiny-app-which-shows-a-line-plot-alongside-the-scatter-plot-for-the-same-function">Exercise 1: Create a new shiny app which shows a line plot alongside the scatter plot for the same function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-using-the-tabset-layout-create-an-interface-which-allows-the-user-to-tab-between-the-line-and-scatterplots">Exercise 2: Using the tabset layout, create an interface which allows the user to tab between the line and scatterplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-solution">Exercise 1 Solution:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-solution">Exercise 2 Solution</a></li>
 </ul>
   </nav></div>
 

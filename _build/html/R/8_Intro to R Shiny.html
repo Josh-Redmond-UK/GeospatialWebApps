@@ -161,18 +161,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Python/4_Ux%20Design%20for%20Absolute%20Beginners.html">UX Design for Total Beginners</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/5_Mapping%20with%20Ipyleaflet.html">Mapping with ipyleaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/6_Models%20and%20Maps%20with%20Ipyleaflet.html">Models and Maps with Ipyleaflet</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../Python/7_Hosting%20and%20Sharing%20Voila%20Apps%20with%20Binder.html">Hosting and Sharing Voila Apps with Binder</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">R</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to R Shiny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_Widgets%20in%20Shiny.html">Widgets in R Shiny</a></li>
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="10_Mapping%20in%20Shiny.html">Mapping in Shiny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_Sharing%20your%20Shiny%20App.html">Sharing your Shiny App</a></li>
 </ul>
@@ -381,6 +376,15 @@ document.write(`
 <p>As well as R studio, you will also need to install the R environment, Rstudio directs you to this when you try to download it, but just in case you missed it, you can find it here: <a class="reference external" href="https://cran.rstudio.com">https://cran.rstudio.com</a></p>
 <p>Once you’ve done that, open up RStudio, the first thing you will need to do is install Shiny:</p>
 <p><code class="docutils literal notranslate"><span class="pre">install.packages(&quot;shiny&quot;)</span></code></p>
+<p>You will additionally need some other packages for the application to work, please run the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">&quot;leaflet&quot;</span><span class="p">)</span>
+<span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">&quot;rsconnect&quot;</span><span class="p">)</span>
+<span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">&quot;raster&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
 <p>Once you have done that, click on the new document icon on the top left of the interface, and scroll down to the ‘new shiny app’ option, select single file.</p>
 <p>Helpfully - this generates an example application for you! Click the ‘run app’ button and it will pop up in a web page.</p>
 </section>

@@ -161,18 +161,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Python/4_Ux%20Design%20for%20Absolute%20Beginners.html">UX Design for Total Beginners</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/5_Mapping%20with%20Ipyleaflet.html">Mapping with ipyleaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Python/6_Models%20and%20Maps%20with%20Ipyleaflet.html">Models and Maps with Ipyleaflet</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../Python/7_Hosting%20and%20Sharing%20Voila%20Apps%20with%20Binder.html">Hosting and Sharing Voila Apps with Binder</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">R</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="8_Intro%20to%20R%20Shiny.html">Introduction to R Shiny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_Widgets%20in%20Shiny.html">Widgets in R Shiny</a></li>
-
-
-
-
-
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mapping in Shiny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_Sharing%20your%20Shiny%20App.html">Sharing your Shiny App</a></li>
 </ul>
@@ -518,6 +513,64 @@ shinyApp(ui = ui, server = server)
 </div>
 <p>EXERCISE 1:</p>
 <p>Similarly to the example in python, add a chart next to the map which shows the distribution of values in the heatwave raster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(shiny)
+library(leaflet)
+library(raster)
+
+NDVI &lt;- raster(&#39;Data/leeds_NDVI_aug_highres.tif&#39;)
+NDWI &lt;- raster(&#39;Data/leeds_NDWI_aug_highres.tif&#39;)
+NDBI &lt;- raster(&#39;Data/leeds_NDBI_aug_highres.tif&#39;)
+
+ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      titlePanel(&quot;Heatwave Modelling App&quot;),
+      sliderInput(&#39;solarRad&#39;, &#39;Solar Irradiance&#39;, 0, 15, 4),
+      sliderInput(&#39;ndviBeta&#39;, &#39;NDVI Coefficient&#39;, -5, 5, 1),
+      sliderInput(&#39;ndwiBeta&#39;, &#39;NDWI Coefficient&#39;, -5, 5, 2),
+      sliderInput(&#39;ndbiBeta&#39;, &#39;NDBI Coefficient&#39;, -5, 5, -1),
+      downloadButton(&#39;downloadButton&#39;, &#39;Download Map&#39;)
+    ),
+    
+    mainPanel(leafletOutput(&quot;Map&quot;),
+              plotOutput(&quot;Histogram&quot;)))
+  
+  
+)
+
+server &lt;- function(input, output) {
+  
+  output$Histogram &lt;- renderPlot({
+    heatwaveRaster &lt;- (NDBI*input$ndbiBeta) + (NDVI*input$ndviBeta) + (NDWI*input$ndwiBeta) + input$solarRad + 15
+    hist(values(heatwaveRaster))
+    
+  })
+  
+  output$Map &lt;- renderLeaflet({
+    heatwaveRaster &lt;- (NDBI*input$ndbiBeta) + (NDVI*input$ndviBeta) + (NDWI*input$ndwiBeta) + input$solarRad + 15
+    
+    #Similarly to Python, we have to generate a colour palette for the dataset
+    pallette = colorNumeric(c(&#39;#0000FF&#39;, &#39;#FF0000&#39;), values(heatwaveRaster), na.color = &quot;transparent&quot;)
+    
+    leaflet() %&gt;% 
+      addTiles() %&gt;%
+      addRasterImage(heatwaveRaster, colors=pallette) %&gt;%
+      addLegend(pal=pallette, values=values(heatwaveRaster))
+    
+    
+  })
+  
+  output$downloadButton = downloadHandler(filename=&#39;map.tif&#39;, 
+                                          content=function(file){
+                                            heatwaveRaster &lt;- (NDBI*input$ndbiBeta) + (NDVI*input$ndviBeta) + (NDWI*input$ndwiBeta) + input$solarRad + 15
+                                            writeRaster(heatwaveRaster, file)
+                                          })
+}
+
+shinyApp(ui = ui, server = server)
+
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
