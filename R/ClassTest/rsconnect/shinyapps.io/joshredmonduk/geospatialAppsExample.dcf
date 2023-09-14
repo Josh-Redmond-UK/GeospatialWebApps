@@ -1,0 +1,12 @@
+name: geospatialAppsExample
+title: geospatialAppsExample
+username: joshredmonduk
+account: joshredmonduk
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9841027
+bundleId: 7675416
+url: https://joshredmonduk.shinyapps.io/geospatialAppsExample/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,12 @@
+name: ClassTest
+title: ClassTest
+username: joshredmonduk
+account: joshredmonduk
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9841524
+bundleId:
+url: https://joshredmonduk.shinyapps.io/ClassTest/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
