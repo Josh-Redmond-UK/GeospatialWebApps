@@ -1,7 +1,7 @@
 
 ## Getting Started
 
-In this course, we will take a guided project-based approacht to build a web-app which explores noise pollution in London, and lets users explore future scenarios and changes to their local area, and export their findings. I have already curated and set up all the data, functions, and code needed to handle the modelling of noise pollution and creating results. This course will teach you how to take those functions, code, and models, and turn them into an app which lets uers interact with parameters and explore results. 
+In this course, we will take a guided project-based approacht to build a web-app which models urban heat in Leeds, and lets users explore future scenarios. I have already curated and set up all the data, functions, and code needed to handle the modelling of heat and creating results. This course will teach you how to take those functions, code, and models, and turn them into an app which lets uers interact with parameters and explore results. 
 
 In this part of the class, we will set up our Python environment so that we can use all the tools and functions necessary for the rest of the project. 
 

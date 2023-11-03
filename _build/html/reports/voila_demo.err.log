@@ -1,0 +1,130 @@
+Traceback (most recent call last):
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/joshredmond/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import ipywidgets as widgets
+from ipyleaflet import Map, ImageOverlay
+import rasterio as rio
+
+
+def model_airtemp(solar_irradiance, ndvi, ndbi, ndwi, c=25, ndvi_beta=-3, ndbi_beta=4, ndwi_beta=-2):
+    airtemp =  ndvi_beta*ndvi + ndbi_beta*ndbi + ndwi_beta*ndwi + np.random.normal(-1, 1) + c + solar_irradiance
+    return airtemp
+
+ndvi_array = rio.open('data/ndvi.tif').read(1)
+ndwi_array = rio.open('data/ndwi.tif').read(1)
+ndbi_array = rio.open('data/ndbi.tif').read(1)
+
+image_extent = rio.open('data/ndvi.tif').bounds
+SW = (bounds.left, bounds.bottom)
+NE = (bounds.right, bounds.top)
+bounds_tuple = (SW, NE)
+
+
+def array_to_jpeg(array, jpeg_path='temp.jpeg'):
+    array = np.moveaxis(airtemp_array, 0, -1)
+
+    array_max = np.max(array)
+    array_min = np.min(array)
+    array = np.clip((array - array_min) / (array_max - array_min) * 255, 0, 255)
+    array = array.as_type(np.uint8)
+
+    image = Image.fromarray(array)
+
+    jpeg_path_temp = SAVE_FILE_FUNCTION(PTH)
+    return jpeg_path
+
+
+solar_irradiance_slider = widgets.FloatSlider(value=14, min=10, max=20, step=0.1, description='Solar Irradiance')
+ndvi_slider = widgets.FloatSlider(value=0, min=-5, max=5, step=0.01, description='NDVI Coefficient')
+ndbi_slider = widgets.FloatSlider(value=0, min=-5, max=5, step=0.01, description='NBVI Coefficient')
+ndwi_slider = widgets.FloatSlider(value=0, min=-5, max=5, step=0.01, description='NBWI Coefficient')
+
+def updateMap(change):
+
+    new_airtemp = model_airtemp(solar_irradiance_slider.value, ndvi_array, ndbi_array, ndwi_array, 13, ndvi_slider.value, 
+                  ndbi_slider.value, ndwi_slider.value)
+    
+    path = array_to_jpeg(new_airtemp)
+    imageLayer = ImageOverlay(path, bounds_tuple)
+    m.reset_layers()
+    m.add_layer(imageLayer)
+    
+
+solar_irradiance_slider.observe(updateMap, 'value')
+ndvi_slider.observe(updateMap, 'value')
+ndbi_slider.observe(updateMap, 'value')
+ndwi_slider.observe(updateMap, 'value')
+
+
+irradiance_slider_container = widgets.Box([solar_irradiance_slider])
+parameters_container = widgets.VBox([ndvi_slider, ndbi_slider, ndwi_slider])
+
+controls_container = widgets.VBox([irradiance_slider_container, parameters_container])
+mapDisplay = widgets.output()
+
+mapLayout = widgets.HBox([mapDisplay, controls_container])
+
+with mapLayout:
+    display(m)
+
+display(mapLayout)
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mCPLE_OpenFailedError[0m                      Traceback (most recent call last)
+File [0;32mrasterio/_base.pyx:310[0m, in [0;36mrasterio._base.DatasetBase.__init__[0;34m()[0m
+
+File [0;32mrasterio/_base.pyx:221[0m, in [0;36mrasterio._base.open_dataset[0;34m()[0m
+
+File [0;32mrasterio/_err.pyx:221[0m, in [0;36mrasterio._err.exc_wrap_pointer[0;34m()[0m
+
+[0;31mCPLE_OpenFailedError[0m: data/ndvi.tif: No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+[0;31mRasterioIOError[0m                           Traceback (most recent call last)
+Cell [0;32mIn[1], line 11[0m
+[1;32m      8[0m     airtemp [38;5;241m=[39m  ndvi_beta[38;5;241m*[39mndvi [38;5;241m+[39m ndbi_beta[38;5;241m*[39mndbi [38;5;241m+[39m ndwi_beta[38;5;241m*[39mndwi [38;5;241m+[39m np[38;5;241m.[39mrandom[38;5;241m.[39mnormal([38;5;241m-[39m[38;5;241m1[39m, [38;5;241m1[39m) [38;5;241m+[39m c [38;5;241m+[39m solar_irradiance
+[1;32m      9[0m     [38;5;28;01mreturn[39;00m airtemp
+[0;32m---> 11[0m ndvi_array [38;5;241m=[39m [43mrio[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mdata/ndvi.tif[39;49m[38;5;124;43m'[39;49m[43m)[49m[38;5;241m.[39mread([38;5;241m1[39m)
+[1;32m     12[0m ndwi_array [38;5;241m=[39m rio[38;5;241m.[39mopen([38;5;124m'[39m[38;5;124mdata/ndwi.tif[39m[38;5;124m'[39m)[38;5;241m.[39mread([38;5;241m1[39m)
+[1;32m     13[0m ndbi_array [38;5;241m=[39m rio[38;5;241m.[39mopen([38;5;124m'[39m[38;5;124mdata/ndbi.tif[39m[38;5;124m'[39m)[38;5;241m.[39mread([38;5;241m1[39m)
+
+File [0;32m~/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/rasterio/env.py:451[0m, in [0;36mensure_env_with_credentials.<locals>.wrapper[0;34m(*args, **kwds)[0m
+[1;32m    448[0m     session [38;5;241m=[39m DummySession()
+[1;32m    450[0m [38;5;28;01mwith[39;00m env_ctor(session[38;5;241m=[39msession):
+[0;32m--> 451[0m     [38;5;28;01mreturn[39;00m [43mf[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/jupyterBook/lib/python3.11/site-packages/rasterio/__init__.py:304[0m, in [0;36mopen[0;34m(fp, mode, driver, width, height, count, crs, transform, dtype, nodata, sharing, **kwargs)[0m
+[1;32m    301[0m path [38;5;241m=[39m _parse_path(raw_dataset_path)
+[1;32m    303[0m [38;5;28;01mif[39;00m mode [38;5;241m==[39m [38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m:
+[0;32m--> 304[0m     dataset [38;5;241m=[39m [43mDatasetReader[49m[43m([49m[43mpath[49m[43m,[49m[43m [49m[43mdriver[49m[38;5;241;43m=[39;49m[43mdriver[49m[43m,[49m[43m [49m[43msharing[49m[38;5;241;43m=[39;49m[43msharing[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    305[0m [38;5;28;01melif[39;00m mode [38;5;241m==[39m [38;5;124m"[39m[38;5;124mr+[39m[38;5;124m"[39m:
+[1;32m    306[0m     dataset [38;5;241m=[39m get_writer_for_path(path, driver[38;5;241m=[39mdriver)(
+[1;32m    307[0m         path, mode, driver[38;5;241m=[39mdriver, sharing[38;5;241m=[39msharing, [38;5;241m*[39m[38;5;241m*[39mkwargs
+[1;32m    308[0m     )
+
+File [0;32mrasterio/_base.pyx:312[0m, in [0;36mrasterio._base.DatasetBase.__init__[0;34m()[0m
+
+[0;31mRasterioIOError[0m: data/ndvi.tif: No such file or directory
+
